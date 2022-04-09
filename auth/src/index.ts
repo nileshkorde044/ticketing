@@ -8,9 +8,17 @@ import { signupRouter } from './routes/signup';
 import { errorHandler } from './middlewares/error-handler';
 import { NotFoundError } from './errors/not-found-error';
 import mongoose from 'mongoose';
+import cookieSession from 'cookie-session';
 
 const app = express();
+app.set('trust proxy', true); // so express know app is behind ingress and can trust this https traffic
 app.use(json());
+app.use(
+  cookieSession({
+    signed: false,
+    secure: true, // set cookie and use only when app is used over https
+  })
+);
 
 app.use(currentUserRouter);
 app.use(signinRouter);
