@@ -6,7 +6,7 @@ export default () => {
   const [email, setEmail] = useState('');
   const [password, setpassword] = useState('');
   const [doRequest, errors] = useRequest({
-    url: '/api/users/signup',
+    url: '/api/users/signin',
     method: 'post',
     body: { email, password },
     onSuccess: () => Router.push('/'),
@@ -38,7 +38,7 @@ export default () => {
         />
       </div>
       {errors}
-      <button className="btn btn-primary">Sign Up</button>
+      <button className="btn btn-primary">Sign In</button>
     </form>
   );
 };
