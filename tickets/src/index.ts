@@ -10,12 +10,12 @@ const start = async () => {
   }
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    console.log('connected to auth - mongodb!!');
+    console.log('connected to tickets - mongodb!!');
   } catch (ex) {
     console.error(ex);
   }
   app.listen(3000, () => {
-    console.log('Auth - Listening on port 3000!!');
+    console.log('Tickets - Listening on port 3000!!');
   });
 };
 

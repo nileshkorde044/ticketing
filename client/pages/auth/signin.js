@@ -19,7 +19,7 @@ export default () => {
 
   return (
     <form onSubmit={onSubmit}>
-      <h1>Sign Up</h1>
+      <h1>Sign In</h1>
       <div className="mb-3">
         <label className="form-label">Email Address</label>
         <input
