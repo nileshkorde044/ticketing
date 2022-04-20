@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import { requireAuth, validateRequest } from '@naktickets/common';
 import { body } from 'express-validator';
-import { Ticket } from '../modal/ticket';
+import { Ticket } from '../models/ticket';
 
 const router = express.Router();
 
@@ -20,7 +20,7 @@ router.post(
     const ticket = Ticket.build({ title, price, userId: req.currentUser!.id });
 
     await ticket.save();
-    res.status(201).send();
+    res.status(201).send(ticket);
   }
 );
 

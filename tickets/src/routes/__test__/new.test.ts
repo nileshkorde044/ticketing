@@ -1,6 +1,6 @@
 import request from 'supertest';
 import { app } from '../../app';
-import { Ticket } from '../../modal/ticket';
+import { Ticket } from '../../models/ticket';
 
 it('has a route handler listening to /api/tickets for post requests', async () => {
   const response = await request(app).post('/api/tickets').send({});
@@ -63,11 +63,13 @@ it('creates a ticket with valid inputs', async () => {
   let tickets = await Ticket.find({});
   expect(tickets.length).toEqual(0);
 
+  const title = 'asldkfj';
+
   await request(app)
     .post('/api/tickets')
     .set('Cookie', global.signin())
     .send({
-      title: 'asldkfj',
+      title,
       price: 20,
     })
     .expect(201);
@@ -75,4 +77,5 @@ it('creates a ticket with valid inputs', async () => {
   tickets = await Ticket.find({});
   expect(tickets.length).toEqual(1);
   expect(tickets[0].price).toEqual(20);
+  expect(tickets[0].title).toEqual(title);
 });
